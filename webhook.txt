@@ -1,0 +1,58 @@
+“Webhooks are nothing but a way for one app to communicate with another.”
+
+WHAT ARE THEY?
+Let’s take a simple example to understand why we even need Webhooks.
+
+Imagine you have connected your app with Stripe (a payment service). You want your app to be notified every time a user makes a payment. How do we do this?
+
+We have two options:
+Keep checking Stripe repeatedly (Polling) → Inefficient
+Let Stripe notify us when a payment happens (Webhook) → Efficient
+
+But Wait… Isn’t This the Same as SSE?
+You might be wondering:
+
+“Webhooks send updates. But doesn’t SSE (Server-Sent Events) do the same thing? What’s the difference?”
+
+Let’s clarify that before moving ahead.
+
+SSE vs. Webhooks
+Both Webhooks and SSE send updates, but their use cases are very different.
+
+SSE (Server-Sent Events): Used when a server needs to send updates to a client (browser).
+Webhooks: Used when one server needs to send updates to another server.
+Example of SSE:
+Let’s say you’re watching a stock market dashboard that updates in real-time. Your browser connects to the server, and the server keeps pushing stock price updates.
+  -Stripe has a server, and your app is another server.
+  -SSE only works for server-to-browser updates.
+  -We need server-to-server communication → Webhook is the solution.
+
+Link showing how webhooks work in Stripe : https://miro.medium.com/v2/resize:fit:720/format:webp/1*8BHAjPwEjp4stGg35IrKvw.png
+
+How We Used Webhooks for WhatsApp Integration
+At our company, we had to integrate our chatbot with WhatsApp because some businesses handle a large portion of their customer queries on WhatsApp.
+
+The Use Case:
+Whenever a customer messages a business on WhatsApp, our bot should automatically reply.
+
+Step-by-Step WhatsApp Webhook Flow:
+-User sends a message to the business’s WhatsApp number.
+-WhatsApp (Meta) triggers a webhook → Calls our webhook URL with the message details.
+-Our backend processes the message (retrieves response from the chatbot).
+-We call the WhatsApp Graph API to send the response back to the user.
+-User receives a reply from the bot on WhatsApp.
+
+Link showing flow : https://miro.medium.com/v2/resize:fit:720/format:webp/1*_kPIEpLaeNbgFEL4sixSSw.png
+You might wonder:
+
+“Why can’t we just directly send a message to the user?”
+Because WhatsApp doesn’t allow businesses to send direct messages to users for spam prevention.
+
+WhatsApp’s Rules:
+-You can’t message users first (they must initiate the chat).
+-You must use the WhatsApp Graph API to reply.
+-If 24 hours pass without a response, you can only send pre-approved template messages.
+
+Webhooks are super powerful because they let apps talk to each other instantly without constant polling.
+
+
