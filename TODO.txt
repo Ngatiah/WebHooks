@@ -1,3 +1,4 @@
 GitHub
 Stripe
 Messaging app i..e Customer chatbot to Whatsapp Business Phone NUmber
+Discord
